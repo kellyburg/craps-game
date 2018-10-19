@@ -1,4 +1,6 @@
 var rollCount=0;
+var gameCount=0;
+var winCount=0;
 var point;
 var msg="";
 function rollDice(){
@@ -17,10 +19,13 @@ function checkWinner(){
         if(sum===7||sum===11){
             isWinner=true;
             msg="You won! Roll again to start a new game.";
+            gameCount++;
+            winCount++;
             rollCount=0;
         }
         else if(sum===2||sum===3||sum===12){
             isWinner=false;
+            gameCount++;
             msg="You lost! Roll again to start a new game.";
             rollCount=0;
         }
@@ -35,11 +40,14 @@ function checkWinner(){
     if(rollCount>1){
         if(sum===7){
             isWinner=true;
+            gameCount++;
+            winCount++;
             msg="You won! Roll again to start a new game";
             rollCount=0; 
         }
         if(sum===point){
             isWinner=false;
+            gameCount++;
             msg="You lost! Roll again to start a new game";
             rollCount=0; 
        }
@@ -53,6 +61,8 @@ function checkWinner(){
         $("#die2").text(die2);
         $("#sum").text(sum);
         $("#message").text(msg);
+        $("#games").text(gameCount);
+        $("#wins").text(winCount);
     });
 
 
