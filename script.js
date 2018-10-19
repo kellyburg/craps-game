@@ -1,5 +1,6 @@
 var rollCount=0;
 var point;
+var msg="";
 function rollDice(){
 const dieValues=[1, 2, 3, 4, 5, 6];
 
@@ -7,27 +8,25 @@ var die1=dieValues[Math.floor(Math.random()*dieValues.length)];
 var die2=dieValues[Math.floor(Math.random()*dieValues.length)];
 var sum=die1+die2;
 rollCount++;
-$(document).ready(function(){
-    $("#die1").text(die1);
-    $("#die2").text(die2);
-    $("#sum").text(sum);
-});
+
 
 function checkWinner(){
     var isWinner;
-    
     //after the first roll, check if player has won or lost or set point number
     if(rollCount===1){
         if(sum===7||sum===11){
             isWinner=true;
+            msg="You won! Roll again to start a new game.";
             rollCount=0;
         }
         else if(sum===2||sum===3||sum===12){
             isWinner=false;
+            msg="You lost! Roll again to start a new game.";
             rollCount=0;
         }
         else {
             point=sum;
+            msg="Roll a 7 before you roll another "+point+" to win!";
             console.log("Point: "+ point);
         }
 
@@ -36,10 +35,12 @@ function checkWinner(){
     if(rollCount>1){
         if(sum===7){
             isWinner=true;
+            msg="You won! Roll again to start a new game";
             rollCount=0; 
         }
         if(sum===point){
             isWinner=false;
+            msg="You lost! Roll again to start a new game";
             rollCount=0; 
        }
     }
@@ -47,6 +48,13 @@ function checkWinner(){
     return isWinner;
     }
     checkWinner();
+    $(document).ready(function(){
+        $("#die1").text(die1);
+        $("#die2").text(die2);
+        $("#sum").text(sum);
+        $("#message").text(msg);
+    });
+
 
 return sum;
 }
