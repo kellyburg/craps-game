@@ -2,12 +2,22 @@
 function rollDice(){
 var dieValues=[1, 2, 3, 4, 5, 6];
 var die1, die2;
-var sum;
    
 die1=dieValues[Math.floor(Math.random()*dieValues.length)];
 die2=dieValues[Math.floor(Math.random()*dieValues.length)];
+$(document).ready(function(){
+    $("#die1").text(die1);
+    $("#die2").text(die2);
+    $("#sum").text(die1+die2);
+});
 return die1+die2;
 }
+
+$(document).ready(function(){
+$("#roll").click(rollDice);
+
+});
+
 
 function playCraps(){
 var isWinner;
@@ -38,4 +48,3 @@ while(newRoll!==point&&newRoll!==7){
 console.log(isWinner);
 return isWinner;
 }
-playCraps();
